@@ -1,7 +1,12 @@
 package com.veritas.service;
 
 import com.veritas.service.dto.FileDTO;
+
+import java.util.List;
 import java.util.Optional;
+import java.util.Set;
+
+import com.veritas.service.dto.FileUploadRequestDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -10,12 +15,12 @@ import org.springframework.data.domain.Pageable;
  */
 public interface FileService {
     /**
-     * Save a file.
+     * Save a file or files.
      *
-     * @param fileDTO the entity to save.
-     * @return the persisted entity.
+     * @param requestDTO the entity to save.
+     * @return the persisted entity(s).
      */
-    FileDTO save(FileDTO fileDTO);
+    Set<FileDTO> save(FileUploadRequestDTO requestDTO);
 
     /**
      * Updates a file.

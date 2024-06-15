@@ -432,7 +432,7 @@ class MetadataResourceIT {
         Metadata partialUpdatedMetadata = new Metadata();
         partialUpdatedMetadata.setId(metadata.getId());
 
-        partialUpdatedMetadata.fileId(UPDATED_FILE_ID).createdAt(UPDATED_CREATED_AT).updatedAt(UPDATED_UPDATED_AT);
+        partialUpdatedMetadata.createdAt(UPDATED_CREATED_AT).updatedAt(UPDATED_UPDATED_AT);
 
         restMetadataMockMvc
             .perform(

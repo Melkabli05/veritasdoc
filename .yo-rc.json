@@ -5,7 +5,7 @@
     "baseName": "veritasdoc",
     "blueprints": [],
     "buildTool": "gradle",
-    "cacheProvider": "ehcache",
+    "cacheProvider": "redis",
     "clientFramework": "angular",
     "clientPackageManager": "npm",
     "creationTimestamp": 1718444883611,

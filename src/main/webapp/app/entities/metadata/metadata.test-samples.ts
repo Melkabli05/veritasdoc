@@ -3,32 +3,34 @@ import dayjs from 'dayjs/esm';
 import { IMetadata, NewMetadata } from './metadata.model';
 
 export const sampleWithRequiredData: IMetadata = {
-  id: 8621,
-  fileId: 'quizzical',
-  key: 'times immunise',
-  value: 'refresh',
+  id: 26933,
+  fileId: 'forenenst',
+  key: 'atop resolution merrily',
+  value: 'times',
 };
 
 export const sampleWithPartialData: IMetadata = {
-  id: 11203,
-  fileId: 'whose dishonor',
-  key: 'wherever inside',
-  value: 'austere meh',
+  id: 9770,
+  fileId: 'tattered forenenst',
+  key: 'until',
+  value: 'scribble coaxingly minute',
+  createdAt: dayjs('2024-06-15T06:50'),
+  updatedAt: dayjs('2024-06-15T07:24'),
 };
 
 export const sampleWithFullData: IMetadata = {
-  id: 16206,
-  fileId: 'brave imperfect',
-  key: 'muscatel',
-  value: 'frenetically stark longitude',
-  createdAt: dayjs('2024-06-14T20:57'),
-  updatedAt: dayjs('2024-06-14T23:05'),
+  id: 395,
+  fileId: 'ouch iron ouch',
+  key: 'ick spectacle',
+  value: 'instead dizzy radio',
+  createdAt: dayjs('2024-06-14T20:55'),
+  updatedAt: dayjs('2024-06-14T18:53'),
 };
 
 export const sampleWithNewData: NewMetadata = {
-  fileId: 'to',
-  key: 'but whose basic',
-  value: 'unless stymie',
+  fileId: 'kindly infinite',
+  key: 'finished foolishly',
+  value: 'properly plagiarize malnutrition',
   id: null,
 };
 

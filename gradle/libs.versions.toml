@@ -7,6 +7,7 @@ checkstyle = "10.17.0"
 jhipster-framework = { module = "tech.jhipster:jhipster-framework", version = "8.5.0" }
 spring-cloud-dependencies = { module = "org.springframework.cloud:spring-cloud-dependencies", version = "2023.0.2" }
 springdoc-openapi-starter-webmvc-api = { module = "org.springdoc:springdoc-openapi-starter-webmvc-api", version = "2.5.0" }
+redisson = { module = "org.redisson:redisson", version = "3.30.0" }
 # jhipster-needle-gradle-dependency-catalog-libraries - JHipster will add additional libraries versions
 
 [plugins]

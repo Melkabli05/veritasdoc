@@ -15,7 +15,7 @@ describe('Tag e2e test', () => {
   const tagPageUrlPattern = new RegExp('/tag(\\?.*)?$');
   const username = Cypress.env('E2E_USERNAME') ?? 'user';
   const password = Cypress.env('E2E_PASSWORD') ?? 'user';
-  const tagSample = { name: 'partially accidentally notable' };
+  const tagSample = { name: 'gah' };
 
   let tag;
 
@@ -160,16 +160,16 @@ describe('Tag e2e test', () => {
     });
 
     it('should create an instance of Tag', () => {
-      cy.get(`[data-cy="name"]`).type('smolt');
-      cy.get(`[data-cy="name"]`).should('have.value', 'smolt');
+      cy.get(`[data-cy="name"]`).type('savory');
+      cy.get(`[data-cy="name"]`).should('have.value', 'savory');
 
-      cy.get(`[data-cy="createdAt"]`).type('2024-06-14T22:23');
+      cy.get(`[data-cy="createdAt"]`).type('2024-06-14T19:43');
       cy.get(`[data-cy="createdAt"]`).blur();
-      cy.get(`[data-cy="createdAt"]`).should('have.value', '2024-06-14T22:23');
+      cy.get(`[data-cy="createdAt"]`).should('have.value', '2024-06-14T19:43');
 
-      cy.get(`[data-cy="updatedAt"]`).type('2024-06-15T05:06');
+      cy.get(`[data-cy="updatedAt"]`).type('2024-06-14T11:44');
       cy.get(`[data-cy="updatedAt"]`).blur();
-      cy.get(`[data-cy="updatedAt"]`).should('have.value', '2024-06-15T05:06');
+      cy.get(`[data-cy="updatedAt"]`).should('have.value', '2024-06-14T11:44');
 
       cy.get(`[data-cy="isActive"]`).should('not.be.checked');
       cy.get(`[data-cy="isActive"]`).click();

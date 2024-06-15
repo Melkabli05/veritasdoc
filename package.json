@@ -40,6 +40,8 @@
     "docker:kafka:up": "docker compose -f src/main/docker/kafka.yml up --wait",
     "docker:keycloak:down": "docker compose -f src/main/docker/keycloak.yml down -v",
     "docker:keycloak:up": "docker compose -f src/main/docker/keycloak.yml up --wait",
+    "docker:redis:down": "docker compose -f src/main/docker/redis.yml down -v",
+    "docker:redis:up": "docker compose -f src/main/docker/redis.yml up --wait",
     "e2e": "npm run e2e:cypress:headed --",
     "e2e:cypress": "cypress run --e2e --browser chrome",
     "e2e:cypress:audits": "cypress run --e2e --browser chrome --config-file cypress-audits.config.js",

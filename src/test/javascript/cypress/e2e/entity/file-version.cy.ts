@@ -15,7 +15,7 @@ describe('FileVersion e2e test', () => {
   const fileVersionPageUrlPattern = new RegExp('/file-version(\\?.*)?$');
   const username = Cypress.env('E2E_USERNAME') ?? 'user';
   const password = Cypress.env('E2E_PASSWORD') ?? 'user';
-  const fileVersionSample = { fileId: 'unethically why', versionNumber: 18867, objectName: 'unethically processor properly' };
+  const fileVersionSample = { fileId: 'hmph', versionNumber: 25464, objectName: 'single or' };
 
   let fileVersion;
 
@@ -160,18 +160,18 @@ describe('FileVersion e2e test', () => {
     });
 
     it('should create an instance of FileVersion', () => {
-      cy.get(`[data-cy="fileId"]`).type('boom blah since');
-      cy.get(`[data-cy="fileId"]`).should('have.value', 'boom blah since');
+      cy.get(`[data-cy="fileId"]`).type('excluding over likewise');
+      cy.get(`[data-cy="fileId"]`).should('have.value', 'excluding over likewise');
 
-      cy.get(`[data-cy="versionNumber"]`).type('30940');
-      cy.get(`[data-cy="versionNumber"]`).should('have.value', '30940');
+      cy.get(`[data-cy="versionNumber"]`).type('17156');
+      cy.get(`[data-cy="versionNumber"]`).should('have.value', '17156');
 
-      cy.get(`[data-cy="objectName"]`).type('chime safely');
-      cy.get(`[data-cy="objectName"]`).should('have.value', 'chime safely');
+      cy.get(`[data-cy="objectName"]`).type('lest degree');
+      cy.get(`[data-cy="objectName"]`).should('have.value', 'lest degree');
 
-      cy.get(`[data-cy="createdAt"]`).type('2024-06-14T17:18');
+      cy.get(`[data-cy="createdAt"]`).type('2024-06-15T00:46');
       cy.get(`[data-cy="createdAt"]`).blur();
-      cy.get(`[data-cy="createdAt"]`).should('have.value', '2024-06-14T17:18');
+      cy.get(`[data-cy="createdAt"]`).should('have.value', '2024-06-15T00:46');
 
       cy.get(entityCreateSaveButtonSelector).click();
 

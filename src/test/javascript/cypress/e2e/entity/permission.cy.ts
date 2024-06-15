@@ -15,7 +15,7 @@ describe('Permission e2e test', () => {
   const permissionPageUrlPattern = new RegExp('/permission(\\?.*)?$');
   const username = Cypress.env('E2E_USERNAME') ?? 'user';
   const password = Cypress.env('E2E_PASSWORD') ?? 'user';
-  const permissionSample = { fileId: 'grim', userId: 'obnoxiously following micromanage', permission: 'distorted certainly aside' };
+  const permissionSample = { fileId: 'qua', userId: 'where', permission: 'aboard clamour torch' };
 
   let permission;
 
@@ -160,22 +160,22 @@ describe('Permission e2e test', () => {
     });
 
     it('should create an instance of Permission', () => {
-      cy.get(`[data-cy="fileId"]`).type('given voluntarily versus');
-      cy.get(`[data-cy="fileId"]`).should('have.value', 'given voluntarily versus');
+      cy.get(`[data-cy="fileId"]`).type('bone');
+      cy.get(`[data-cy="fileId"]`).should('have.value', 'bone');
 
-      cy.get(`[data-cy="userId"]`).type('mmm');
-      cy.get(`[data-cy="userId"]`).should('have.value', 'mmm');
+      cy.get(`[data-cy="userId"]`).type('sans story');
+      cy.get(`[data-cy="userId"]`).should('have.value', 'sans story');
 
-      cy.get(`[data-cy="permission"]`).type('midden garage');
-      cy.get(`[data-cy="permission"]`).should('have.value', 'midden garage');
+      cy.get(`[data-cy="permission"]`).type('bah given outfielder');
+      cy.get(`[data-cy="permission"]`).should('have.value', 'bah given outfielder');
 
-      cy.get(`[data-cy="createdAt"]`).type('2024-06-14T23:55');
+      cy.get(`[data-cy="createdAt"]`).type('2024-06-15T01:10');
       cy.get(`[data-cy="createdAt"]`).blur();
-      cy.get(`[data-cy="createdAt"]`).should('have.value', '2024-06-14T23:55');
+      cy.get(`[data-cy="createdAt"]`).should('have.value', '2024-06-15T01:10');
 
-      cy.get(`[data-cy="updatedAt"]`).type('2024-06-14T22:36');
+      cy.get(`[data-cy="updatedAt"]`).type('2024-06-14T17:29');
       cy.get(`[data-cy="updatedAt"]`).blur();
-      cy.get(`[data-cy="updatedAt"]`).should('have.value', '2024-06-14T22:36');
+      cy.get(`[data-cy="updatedAt"]`).should('have.value', '2024-06-14T17:29');
 
       cy.get(entityCreateSaveButtonSelector).click();
 

@@ -1,9 +1,16 @@
 package com.veritas.config;
 
-import java.time.Duration;
-import org.ehcache.config.builders.*;
-import org.ehcache.jsr107.Eh107Configuration;
+import java.net.URI;
+import java.util.concurrent.TimeUnit;
+import javax.cache.configuration.MutableConfiguration;
+import javax.cache.expiry.CreatedExpiryPolicy;
+import javax.cache.expiry.Duration;
 import org.hibernate.cache.jcache.ConfigSettings;
+import org.redisson.Redisson;
+import org.redisson.config.ClusterServersConfig;
+import org.redisson.config.Config;
+import org.redisson.config.SingleServerConfig;
+import org.redisson.jcache.configuration.RedissonConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.cache.JCacheManagerCustomizer;
 import org.springframework.boot.autoconfigure.orm.jpa.HibernatePropertiesCustomizer;
@@ -12,6 +19,8 @@ import org.springframework.boot.info.GitProperties;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cache.interceptor.KeyGenerator;
 import org.springframework.context.annotation.*;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import tech.jhipster.config.JHipsterProperties;
 import tech.jhipster.config.cache.PrefixedKeyGenerator;
 
@@ -21,49 +30,77 @@ public class CacheConfiguration {
 
     private GitProperties gitProperties;
     private BuildProperties buildProperties;
-    private final javax.cache.configuration.Configuration<Object, Object> jcacheConfiguration;
 
-    public CacheConfiguration(JHipsterProperties jHipsterProperties) {
-        JHipsterProperties.Cache.Ehcache ehcache = jHipsterProperties.getCache().getEhcache();
+    @Bean
+    public javax.cache.configuration.Configuration<Object, Object> jcacheConfiguration(JHipsterProperties jHipsterProperties) {
+        MutableConfiguration<Object, Object> jcacheConfig = new MutableConfiguration<>();
 
-        jcacheConfiguration = Eh107Configuration.fromEhcacheCacheConfiguration(
-            CacheConfigurationBuilder.newCacheConfigurationBuilder(
-                Object.class,
-                Object.class,
-                ResourcePoolsBuilder.heap(ehcache.getMaxEntries())
-            )
-                .withExpiry(ExpiryPolicyBuilder.timeToLiveExpiration(Duration.ofSeconds(ehcache.getTimeToLiveSeconds())))
-                .build()
+        URI redisUri = URI.create(jHipsterProperties.getCache().getRedis().getServer()[0]);
+
+        Config config = new Config();
+        // Fix Hibernate lazy initialization https://github.com/jhipster/generator-jhipster/issues/22889
+        config.setCodec(new org.redisson.codec.SerializationCodec());
+        if (jHipsterProperties.getCache().getRedis().isCluster()) {
+            ClusterServersConfig clusterServersConfig = config
+                .useClusterServers()
+                .setMasterConnectionPoolSize(jHipsterProperties.getCache().getRedis().getConnectionPoolSize())
+                .setMasterConnectionMinimumIdleSize(jHipsterProperties.getCache().getRedis().getConnectionMinimumIdleSize())
+                .setSubscriptionConnectionPoolSize(jHipsterProperties.getCache().getRedis().getSubscriptionConnectionPoolSize())
+                .addNodeAddress(jHipsterProperties.getCache().getRedis().getServer());
+
+            if (redisUri.getUserInfo() != null) {
+                clusterServersConfig.setPassword(redisUri.getUserInfo().substring(redisUri.getUserInfo().indexOf(':') + 1));
+            }
+        } else {
+            SingleServerConfig singleServerConfig = config
+                .useSingleServer()
+                .setConnectionPoolSize(jHipsterProperties.getCache().getRedis().getConnectionPoolSize())
+                .setConnectionMinimumIdleSize(jHipsterProperties.getCache().getRedis().getConnectionMinimumIdleSize())
+                .setSubscriptionConnectionPoolSize(jHipsterProperties.getCache().getRedis().getSubscriptionConnectionPoolSize())
+                .setAddress(jHipsterProperties.getCache().getRedis().getServer()[0]);
+
+            if (redisUri.getUserInfo() != null) {
+                singleServerConfig.setPassword(redisUri.getUserInfo().substring(redisUri.getUserInfo().indexOf(':') + 1));
+            }
+        }
+        jcacheConfig.setStatisticsEnabled(true);
+        jcacheConfig.setExpiryPolicyFactory(
+            CreatedExpiryPolicy.factoryOf(new Duration(TimeUnit.SECONDS, jHipsterProperties.getCache().getRedis().getExpiration()))
         );
+        return RedissonConfiguration.fromInstance(Redisson.create(config), jcacheConfig);
     }
 
     @Bean
-    public HibernatePropertiesCustomizer hibernatePropertiesCustomizer(javax.cache.CacheManager cacheManager) {
-        return hibernateProperties -> hibernateProperties.put(ConfigSettings.CACHE_MANAGER, cacheManager);
+    public HibernatePropertiesCustomizer hibernatePropertiesCustomizer(javax.cache.CacheManager cm) {
+        return hibernateProperties -> hibernateProperties.put(ConfigSettings.CACHE_MANAGER, cm);
     }
 
     @Bean
-    public JCacheManagerCustomizer cacheManagerCustomizer() {
+    public JCacheManagerCustomizer cacheManagerCustomizer(javax.cache.configuration.Configuration<Object, Object> jcacheConfiguration) {
         return cm -> {
-            createCache(cm, com.veritas.domain.File.class.getName());
-            createCache(cm, com.veritas.domain.File.class.getName() + ".metadata");
-            createCache(cm, com.veritas.domain.File.class.getName() + ".fileTags");
-            createCache(cm, com.veritas.domain.File.class.getName() + ".fileFolders");
-            createCache(cm, com.veritas.domain.File.class.getName() + ".tags");
-            createCache(cm, com.veritas.domain.File.class.getName() + ".folders");
-            createCache(cm, com.veritas.domain.FileVersion.class.getName());
-            createCache(cm, com.veritas.domain.Metadata.class.getName());
-            createCache(cm, com.veritas.domain.Tag.class.getName());
-            createCache(cm, com.veritas.domain.Tag.class.getName() + ".files");
-            createCache(cm, com.veritas.domain.Permission.class.getName());
-            createCache(cm, com.veritas.domain.Folder.class.getName());
-            createCache(cm, com.veritas.domain.Folder.class.getName() + ".permissions");
-            createCache(cm, com.veritas.domain.Folder.class.getName() + ".files");
-            // jhipster-needle-ehcache-add-entry
+            createCache(cm, com.veritas.domain.File.class.getName(), jcacheConfiguration);
+            createCache(cm, com.veritas.domain.File.class.getName() + ".metadata", jcacheConfiguration);
+            createCache(cm, com.veritas.domain.File.class.getName() + ".fileTags", jcacheConfiguration);
+            createCache(cm, com.veritas.domain.File.class.getName() + ".fileFolders", jcacheConfiguration);
+            createCache(cm, com.veritas.domain.File.class.getName() + ".tags", jcacheConfiguration);
+            createCache(cm, com.veritas.domain.File.class.getName() + ".folders", jcacheConfiguration);
+            createCache(cm, com.veritas.domain.FileVersion.class.getName(), jcacheConfiguration);
+            createCache(cm, com.veritas.domain.Metadata.class.getName(), jcacheConfiguration);
+            createCache(cm, com.veritas.domain.Tag.class.getName(), jcacheConfiguration);
+            createCache(cm, com.veritas.domain.Tag.class.getName() + ".files", jcacheConfiguration);
+            createCache(cm, com.veritas.domain.Permission.class.getName(), jcacheConfiguration);
+            createCache(cm, com.veritas.domain.Folder.class.getName(), jcacheConfiguration);
+            createCache(cm, com.veritas.domain.Folder.class.getName() + ".permissions", jcacheConfiguration);
+            createCache(cm, com.veritas.domain.Folder.class.getName() + ".files", jcacheConfiguration);
+            // jhipster-needle-redis-add-entry
         };
     }
 
-    private void createCache(javax.cache.CacheManager cm, String cacheName) {
+    private void createCache(
+        javax.cache.CacheManager cm,
+        String cacheName,
+        javax.cache.configuration.Configuration<Object, Object> jcacheConfiguration
+    ) {
         javax.cache.Cache<Object, Object> cache = cm.getCache(cacheName);
         if (cache != null) {
             cache.clear();

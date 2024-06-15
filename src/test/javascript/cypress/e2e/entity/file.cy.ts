@@ -15,7 +15,7 @@ describe('File e2e test', () => {
   const filePageUrlPattern = new RegExp('/file(\\?.*)?$');
   const username = Cypress.env('E2E_USERNAME') ?? 'user';
   const password = Cypress.env('E2E_PASSWORD') ?? 'user';
-  const fileSample = { filename: 'punctual why less', bucketName: 'supposing microwave', objectName: 'about' };
+  const fileSample = { filename: 'cannibalize knowingly', bucketName: 'where', objectName: 'lest blah' };
 
   let file;
 
@@ -160,31 +160,31 @@ describe('File e2e test', () => {
     });
 
     it('should create an instance of File', () => {
-      cy.get(`[data-cy="filename"]`).type('boastfully');
-      cy.get(`[data-cy="filename"]`).should('have.value', 'boastfully');
+      cy.get(`[data-cy="filename"]`).type('unlawful');
+      cy.get(`[data-cy="filename"]`).should('have.value', 'unlawful');
 
-      cy.get(`[data-cy="bucketName"]`).type('ha');
-      cy.get(`[data-cy="bucketName"]`).should('have.value', 'ha');
+      cy.get(`[data-cy="bucketName"]`).type('aw');
+      cy.get(`[data-cy="bucketName"]`).should('have.value', 'aw');
 
-      cy.get(`[data-cy="objectName"]`).type('reassess abbreviation');
-      cy.get(`[data-cy="objectName"]`).should('have.value', 'reassess abbreviation');
+      cy.get(`[data-cy="objectName"]`).type('when yowza');
+      cy.get(`[data-cy="objectName"]`).should('have.value', 'when yowza');
 
-      cy.get(`[data-cy="contentType"]`).type('churn tenderly fortune');
-      cy.get(`[data-cy="contentType"]`).should('have.value', 'churn tenderly fortune');
+      cy.get(`[data-cy="contentType"]`).type('direct kissingly');
+      cy.get(`[data-cy="contentType"]`).should('have.value', 'direct kissingly');
 
-      cy.get(`[data-cy="fileSize"]`).type('15259');
-      cy.get(`[data-cy="fileSize"]`).should('have.value', '15259');
+      cy.get(`[data-cy="fileSize"]`).type('5650');
+      cy.get(`[data-cy="fileSize"]`).should('have.value', '5650');
 
-      cy.get(`[data-cy="uploadedBy"]`).type('tattler');
-      cy.get(`[data-cy="uploadedBy"]`).should('have.value', 'tattler');
+      cy.get(`[data-cy="uploadedBy"]`).type('oof');
+      cy.get(`[data-cy="uploadedBy"]`).should('have.value', 'oof');
 
-      cy.get(`[data-cy="createdAt"]`).type('2024-06-15T04:27');
+      cy.get(`[data-cy="createdAt"]`).type('2024-06-15T09:26');
       cy.get(`[data-cy="createdAt"]`).blur();
-      cy.get(`[data-cy="createdAt"]`).should('have.value', '2024-06-15T04:27');
+      cy.get(`[data-cy="createdAt"]`).should('have.value', '2024-06-15T09:26');
 
-      cy.get(`[data-cy="updatedAt"]`).type('2024-06-15T03:19');
+      cy.get(`[data-cy="updatedAt"]`).type('2024-06-14T11:23');
       cy.get(`[data-cy="updatedAt"]`).blur();
-      cy.get(`[data-cy="updatedAt"]`).should('have.value', '2024-06-15T03:19');
+      cy.get(`[data-cy="updatedAt"]`).should('have.value', '2024-06-14T11:23');
 
       cy.get(`[data-cy="isActive"]`).should('not.be.checked');
       cy.get(`[data-cy="isActive"]`).click();

@@ -3,6 +3,7 @@ package com.veritas;
 import com.veritas.config.AsyncSyncConfiguration;
 import com.veritas.config.EmbeddedElasticsearch;
 import com.veritas.config.EmbeddedKafka;
+import com.veritas.config.EmbeddedRedis;
 import com.veritas.config.EmbeddedSQL;
 import com.veritas.config.JacksonConfiguration;
 import com.veritas.config.TestSecurityConfiguration;
@@ -20,6 +21,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest(
     classes = { VeritasdocApp.class, JacksonConfiguration.class, AsyncSyncConfiguration.class, TestSecurityConfiguration.class }
 )
+@EmbeddedRedis
 @EmbeddedElasticsearch
 @EmbeddedSQL
 @EmbeddedKafka

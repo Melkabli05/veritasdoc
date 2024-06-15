@@ -388,7 +388,11 @@ class FolderResourceIT {
         Folder partialUpdatedFolder = new Folder();
         partialUpdatedFolder.setId(folder.getId());
 
-        partialUpdatedFolder.name(UPDATED_NAME).updatedAt(UPDATED_UPDATED_AT);
+        partialUpdatedFolder
+            .name(UPDATED_NAME)
+            .parentFolderId(UPDATED_PARENT_FOLDER_ID)
+            .createdAt(UPDATED_CREATED_AT)
+            .updatedAt(UPDATED_UPDATED_AT);
 
         restFolderMockMvc
             .perform(

@@ -368,7 +368,7 @@ class TagResourceIT {
         Tag partialUpdatedTag = new Tag();
         partialUpdatedTag.setId(tag.getId());
 
-        partialUpdatedTag.createdAt(UPDATED_CREATED_AT).updatedAt(UPDATED_UPDATED_AT).isActive(UPDATED_IS_ACTIVE);
+        partialUpdatedTag.name(UPDATED_NAME);
 
         restTagMockMvc
             .perform(

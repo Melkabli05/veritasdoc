@@ -496,8 +496,6 @@ class FileResourceIT {
         partialUpdatedFile
             .filename(UPDATED_FILENAME)
             .objectName(UPDATED_OBJECT_NAME)
-            .fileSize(UPDATED_FILE_SIZE)
-            .uploadedBy(UPDATED_UPLOADED_BY)
             .updatedAt(UPDATED_UPDATED_AT)
             .isActive(UPDATED_IS_ACTIVE);
 

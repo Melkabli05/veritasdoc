@@ -49,12 +49,12 @@ describe('Folder Management Update Component', () => {
   describe('ngOnInit', () => {
     it('Should call File query and add missing value', () => {
       const folder: IFolder = { id: 456 };
-      const file: IFile = { id: 4788 };
+      const file: IFile = { id: 16403 };
       folder.file = file;
-      const files: IFile[] = [{ id: 5715 }];
+      const files: IFile[] = [{ id: 24850 }];
       folder.files = files;
 
-      const fileCollection: IFile[] = [{ id: 22494 }];
+      const fileCollection: IFile[] = [{ id: 22828 }];
       jest.spyOn(fileService, 'query').mockReturnValue(of(new HttpResponse({ body: fileCollection })));
       const additionalFiles = [file, ...files];
       const expectedCollection: IFile[] = [...additionalFiles, ...fileCollection];
@@ -73,9 +73,9 @@ describe('Folder Management Update Component', () => {
 
     it('Should update editForm', () => {
       const folder: IFolder = { id: 456 };
-      const file: IFile = { id: 24135 };
+      const file: IFile = { id: 30921 };
       folder.file = file;
-      const files: IFile = { id: 19880 };
+      const files: IFile = { id: 31118 };
       folder.files = [files];
 
       activatedRoute.data = of({ folder });

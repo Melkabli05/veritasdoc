@@ -3,10 +3,20 @@ package com.veritas.service.impl;
 import com.veritas.domain.File;
 import com.veritas.repository.FileRepository;
 import com.veritas.repository.search.FileSearchRepository;
+import com.veritas.security.SecurityUtils;
 import com.veritas.service.FileService;
-import com.veritas.service.dto.FileDTO;
+import com.veritas.service.StorageService;
+import com.veritas.service.dto.*;
 import com.veritas.service.mapper.FileMapper;
-import java.util.Optional;
+
+import java.io.Serializable;
+import java.time.ZonedDateTime;
+import java.util.*;
+import java.util.concurrent.*;
+import java.util.stream.Collectors;
+
+import io.minio.StatObjectResponse;
+import jakarta.validation.constraints.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -29,19 +39,67 @@ public class FileServiceImpl implements FileService {
 
     private final FileSearchRepository fileSearchRepository;
 
-    public FileServiceImpl(FileRepository fileRepository, FileMapper fileMapper, FileSearchRepository fileSearchRepository) {
+    private final StorageService storageService;
+
+    public FileServiceImpl(FileRepository fileRepository, FileMapper fileMapper, FileSearchRepository fileSearchRepository, StorageService storageService) {
         this.fileRepository = fileRepository;
         this.fileMapper = fileMapper;
         this.fileSearchRepository = fileSearchRepository;
+        this.storageService = storageService;
     }
 
     @Override
-    public FileDTO save(FileDTO fileDTO) {
-        log.debug("Request to save File : {}", fileDTO);
-        File file = fileMapper.toEntity(fileDTO);
-        file = fileRepository.save(file);
-        fileSearchRepository.index(file);
-        return fileMapper.toDto(file);
+    public Set<FileDTO> save(FileUploadRequestDTO request) {
+        try (ExecutorService executor = Executors.newVirtualThreadPerTaskExecutor()) {
+            List<CompletableFuture<StatObjectResponse>> futures = new ArrayList<>();
+            List<FileDTO> savedFileDTOs = new ArrayList<>();
+
+            request.files().forEach(file -> {
+                CompletableFuture<StatObjectResponse> future = CompletableFuture.supplyAsync(() -> {
+                    try {
+                        return storageService.uploadFile(file, request.bucketName(), request.folder());
+                    } catch (Exception e) {
+                        log.error("Error uploading file: {}", e.getMessage());
+                        return null;
+                    }
+                }, executor);
+                futures.add(future);
+            });
+
+            CompletableFuture.allOf(futures.toArray(new CompletableFuture[0])).join();
+
+            futures.forEach(future -> {
+                try {
+                    StatObjectResponse statObjectResponse = future.get();
+                    if (statObjectResponse != null) {
+                        savedFileDTOs.add(buildFileDTO(statObjectResponse));
+                    }
+                } catch (InterruptedException | ExecutionException e) {
+                    log.error("Error getting file upload response: {}", e.getMessage());
+                }
+            });
+
+            List<File> savedFiles = fileRepository.saveAll(savedFileDTOs.stream().map(fileMapper::toEntity).toList());
+            savedFiles.forEach(fileSearchRepository::index);
+
+            return savedFiles.stream().map(fileMapper::toDto).collect(Collectors.toSet());
+        } catch (Exception e) {
+            log.error("Error in file saving process: {}", e.getMessage());
+            return Collections.emptySet();
+        }
+    }
+
+    private FileDTO buildFileDTO(StatObjectResponse statObjectResponse) {
+        var fileDTO = new FileDTO();
+        fileDTO.setFilename(statObjectResponse.object());
+        fileDTO.setBucketName(statObjectResponse.bucket());
+        fileDTO.setObjectName(statObjectResponse.object());
+        fileDTO.setContentType(statObjectResponse.contentType());
+        fileDTO.setFileSize(statObjectResponse.size());
+        fileDTO.setUploadedBy(SecurityUtils.getCurrentUserLogin().orElse(null));
+        fileDTO.setCreatedAt(statObjectResponse.lastModified());
+        return fileDTO;
+
     }
 
     @Override

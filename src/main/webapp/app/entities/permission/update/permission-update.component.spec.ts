@@ -49,10 +49,10 @@ describe('Permission Management Update Component', () => {
   describe('ngOnInit', () => {
     it('Should call Folder query and add missing value', () => {
       const permission: IPermission = { id: 456 };
-      const folder: IFolder = { id: 23279 };
+      const folder: IFolder = { id: 3195 };
       permission.folder = folder;
 
-      const folderCollection: IFolder[] = [{ id: 19573 }];
+      const folderCollection: IFolder[] = [{ id: 19511 }];
       jest.spyOn(folderService, 'query').mockReturnValue(of(new HttpResponse({ body: folderCollection })));
       const additionalFolders = [folder];
       const expectedCollection: IFolder[] = [...additionalFolders, ...folderCollection];
@@ -71,7 +71,7 @@ describe('Permission Management Update Component', () => {
 
     it('Should update editForm', () => {
       const permission: IPermission = { id: 456 };
-      const folder: IFolder = { id: 32473 };
+      const folder: IFolder = { id: 8250 };
       permission.folder = folder;
 
       activatedRoute.data = of({ permission });

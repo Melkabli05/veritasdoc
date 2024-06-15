@@ -432,12 +432,7 @@ class PermissionResourceIT {
         Permission partialUpdatedPermission = new Permission();
         partialUpdatedPermission.setId(permission.getId());
 
-        partialUpdatedPermission
-            .fileId(UPDATED_FILE_ID)
-            .userId(UPDATED_USER_ID)
-            .permission(UPDATED_PERMISSION)
-            .createdAt(UPDATED_CREATED_AT)
-            .updatedAt(UPDATED_UPDATED_AT);
+        partialUpdatedPermission.userId(UPDATED_USER_ID).permission(UPDATED_PERMISSION).createdAt(UPDATED_CREATED_AT);
 
         restPermissionMockMvc
             .perform(

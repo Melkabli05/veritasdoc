@@ -432,7 +432,7 @@ class FileVersionResourceIT {
         FileVersion partialUpdatedFileVersion = new FileVersion();
         partialUpdatedFileVersion.setId(fileVersion.getId());
 
-        partialUpdatedFileVersion.objectName(UPDATED_OBJECT_NAME).createdAt(UPDATED_CREATED_AT);
+        partialUpdatedFileVersion.createdAt(UPDATED_CREATED_AT);
 
         restFileVersionMockMvc
             .perform(

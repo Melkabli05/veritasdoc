@@ -171,6 +171,8 @@ dependencies {
     testImplementation "org.testcontainers:junit-jupiter"
     testImplementation "org.testcontainers:testcontainers"
     implementation "org.springframework.boot:spring-boot-starter-data-elasticsearch"
+    implementation "io.minio:minio:8.5.10"
+
     testImplementation "org.awaitility:awaitility"
     testImplementation "org.testcontainers:elasticsearch"
     implementation "org.springframework.boot:spring-boot-starter-websocket"

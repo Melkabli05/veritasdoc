@@ -3,26 +3,25 @@ import dayjs from 'dayjs/esm';
 import { ITag, NewTag } from './tag.model';
 
 export const sampleWithRequiredData: ITag = {
-  id: 25969,
-  name: 'eye kooky tee',
+  id: 14125,
+  name: 'pith unnecessarily',
 };
 
 export const sampleWithPartialData: ITag = {
-  id: 31112,
-  name: 'pungent',
-  isActive: false,
+  id: 375,
+  name: 'fatigues livid',
 };
 
 export const sampleWithFullData: ITag = {
-  id: 18189,
-  name: 'creosote ah',
-  createdAt: dayjs('2024-06-14T15:43'),
-  updatedAt: dayjs('2024-06-14T13:43'),
-  isActive: false,
+  id: 14920,
+  name: 'meanwhile',
+  createdAt: dayjs('2024-06-14T12:43'),
+  updatedAt: dayjs('2024-06-15T04:38'),
+  isActive: true,
 };
 
 export const sampleWithNewData: NewTag = {
-  name: 'below aboard',
+  name: 'echo',
   id: null,
 };
 

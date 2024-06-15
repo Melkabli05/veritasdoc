@@ -49,12 +49,12 @@ describe('Tag Management Update Component', () => {
   describe('ngOnInit', () => {
     it('Should call File query and add missing value', () => {
       const tag: ITag = { id: 456 };
-      const file: IFile = { id: 21537 };
+      const file: IFile = { id: 25158 };
       tag.file = file;
-      const files: IFile[] = [{ id: 16378 }];
+      const files: IFile[] = [{ id: 17989 }];
       tag.files = files;
 
-      const fileCollection: IFile[] = [{ id: 8257 }];
+      const fileCollection: IFile[] = [{ id: 12149 }];
       jest.spyOn(fileService, 'query').mockReturnValue(of(new HttpResponse({ body: fileCollection })));
       const additionalFiles = [file, ...files];
       const expectedCollection: IFile[] = [...additionalFiles, ...fileCollection];
@@ -73,9 +73,9 @@ describe('Tag Management Update Component', () => {
 
     it('Should update editForm', () => {
       const tag: ITag = { id: 456 };
-      const file: IFile = { id: 14397 };
+      const file: IFile = { id: 18089 };
       tag.file = file;
-      const files: IFile = { id: 17985 };
+      const files: IFile = { id: 7210 };
       tag.files = [files];
 
       activatedRoute.data = of({ tag });

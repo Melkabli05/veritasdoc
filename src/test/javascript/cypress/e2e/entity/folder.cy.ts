@@ -15,7 +15,7 @@ describe('Folder e2e test', () => {
   const folderPageUrlPattern = new RegExp('/folder(\\?.*)?$');
   const username = Cypress.env('E2E_USERNAME') ?? 'user';
   const password = Cypress.env('E2E_PASSWORD') ?? 'user';
-  const folderSample = { name: 'ew' };
+  const folderSample = { name: 'vice' };
 
   let folder;
 
@@ -160,19 +160,19 @@ describe('Folder e2e test', () => {
     });
 
     it('should create an instance of Folder', () => {
-      cy.get(`[data-cy="name"]`).type('salt slight');
-      cy.get(`[data-cy="name"]`).should('have.value', 'salt slight');
+      cy.get(`[data-cy="name"]`).type('generally longingly');
+      cy.get(`[data-cy="name"]`).should('have.value', 'generally longingly');
 
-      cy.get(`[data-cy="parentFolderId"]`).type('tousle yum meh');
-      cy.get(`[data-cy="parentFolderId"]`).should('have.value', 'tousle yum meh');
+      cy.get(`[data-cy="parentFolderId"]`).type('above');
+      cy.get(`[data-cy="parentFolderId"]`).should('have.value', 'above');
 
-      cy.get(`[data-cy="createdAt"]`).type('2024-06-14T20:03');
+      cy.get(`[data-cy="createdAt"]`).type('2024-06-15T04:21');
       cy.get(`[data-cy="createdAt"]`).blur();
-      cy.get(`[data-cy="createdAt"]`).should('have.value', '2024-06-14T20:03');
+      cy.get(`[data-cy="createdAt"]`).should('have.value', '2024-06-15T04:21');
 
-      cy.get(`[data-cy="updatedAt"]`).type('2024-06-15T04:43');
+      cy.get(`[data-cy="updatedAt"]`).type('2024-06-14T17:15');
       cy.get(`[data-cy="updatedAt"]`).blur();
-      cy.get(`[data-cy="updatedAt"]`).should('have.value', '2024-06-15T04:43');
+      cy.get(`[data-cy="updatedAt"]`).should('have.value', '2024-06-14T17:15');
 
       cy.get(`[data-cy="isActive"]`).should('not.be.checked');
       cy.get(`[data-cy="isActive"]`).click();

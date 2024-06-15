@@ -57,10 +57,10 @@ describe('File Management Update Component', () => {
   describe('ngOnInit', () => {
     it('Should call fileVersion query and add missing value', () => {
       const file: IFile = { id: 456 };
-      const fileVersion: IFileVersion = { id: 22646 };
+      const fileVersion: IFileVersion = { id: 2191 };
       file.fileVersion = fileVersion;
 
-      const fileVersionCollection: IFileVersion[] = [{ id: 7946 }];
+      const fileVersionCollection: IFileVersion[] = [{ id: 4193 }];
       jest.spyOn(fileVersionService, 'query').mockReturnValue(of(new HttpResponse({ body: fileVersionCollection })));
       const expectedCollection: IFileVersion[] = [fileVersion, ...fileVersionCollection];
       jest.spyOn(fileVersionService, 'addFileVersionToCollectionIfMissing').mockReturnValue(expectedCollection);
@@ -75,10 +75,10 @@ describe('File Management Update Component', () => {
 
     it('Should call Tag query and add missing value', () => {
       const file: IFile = { id: 456 };
-      const tags: ITag[] = [{ id: 12130 }];
+      const tags: ITag[] = [{ id: 24302 }];
       file.tags = tags;
 
-      const tagCollection: ITag[] = [{ id: 24550 }];
+      const tagCollection: ITag[] = [{ id: 188 }];
       jest.spyOn(tagService, 'query').mockReturnValue(of(new HttpResponse({ body: tagCollection })));
       const additionalTags = [...tags];
       const expectedCollection: ITag[] = [...additionalTags, ...tagCollection];
@@ -94,10 +94,10 @@ describe('File Management Update Component', () => {
 
     it('Should call Folder query and add missing value', () => {
       const file: IFile = { id: 456 };
-      const folders: IFolder[] = [{ id: 4838 }];
+      const folders: IFolder[] = [{ id: 29814 }];
       file.folders = folders;
 
-      const folderCollection: IFolder[] = [{ id: 22611 }];
+      const folderCollection: IFolder[] = [{ id: 17105 }];
       jest.spyOn(folderService, 'query').mockReturnValue(of(new HttpResponse({ body: folderCollection })));
       const additionalFolders = [...folders];
       const expectedCollection: IFolder[] = [...additionalFolders, ...folderCollection];
@@ -116,11 +116,11 @@ describe('File Management Update Component', () => {
 
     it('Should update editForm', () => {
       const file: IFile = { id: 456 };
-      const fileVersion: IFileVersion = { id: 4855 };
+      const fileVersion: IFileVersion = { id: 9479 };
       file.fileVersion = fileVersion;
-      const tags: ITag = { id: 5239 };
+      const tags: ITag = { id: 8427 };
       file.tags = [tags];
-      const folders: IFolder = { id: 12037 };
+      const folders: IFolder = { id: 6051 };
       file.folders = [folders];
 
       activatedRoute.data = of({ file });

@@ -49,10 +49,10 @@ describe('Metadata Management Update Component', () => {
   describe('ngOnInit', () => {
     it('Should call File query and add missing value', () => {
       const metadata: IMetadata = { id: 456 };
-      const file: IFile = { id: 13993 };
+      const file: IFile = { id: 13818 };
       metadata.file = file;
 
-      const fileCollection: IFile[] = [{ id: 9189 }];
+      const fileCollection: IFile[] = [{ id: 20091 }];
       jest.spyOn(fileService, 'query').mockReturnValue(of(new HttpResponse({ body: fileCollection })));
       const additionalFiles = [file];
       const expectedCollection: IFile[] = [...additionalFiles, ...fileCollection];
@@ -71,7 +71,7 @@ describe('Metadata Management Update Component', () => {
 
     it('Should update editForm', () => {
       const metadata: IMetadata = { id: 456 };
-      const file: IFile = { id: 32544 };
+      const file: IFile = { id: 25457 };
       metadata.file = file;
 
       activatedRoute.data = of({ metadata });
