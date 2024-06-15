@@ -1,0 +1,4 @@
+org.springframework.test.context.ContextCustomizerFactory = com.veritas.config.\
+    SqlTestContainersSpringContextCustomizerFactory,com.veritas.config.\
+    TestContainersSpringContextCustomizerFactory,com.veritas.config.\
+    KafkaTestContainersSpringContextCustomizerFactory
