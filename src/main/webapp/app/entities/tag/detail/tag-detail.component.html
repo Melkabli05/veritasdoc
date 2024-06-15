@@ -1,0 +1,63 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (tag()) {
+      <div>
+        <h2 data-cy="tagDetailsHeading"><span jhiTranslate="veritasdocApp.tag.detail.title">Tag</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ tag()!.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="veritasdocApp.tag.name">Name</span></dt>
+          <dd>
+            <span>{{ tag()!.name }}</span>
+          </dd>
+          <dt><span jhiTranslate="veritasdocApp.tag.createdAt">Created At</span></dt>
+          <dd>
+            <span>{{ tag()!.createdAt | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="veritasdocApp.tag.updatedAt">Updated At</span></dt>
+          <dd>
+            <span>{{ tag()!.updatedAt | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="veritasdocApp.tag.isActive">Is Active</span></dt>
+          <dd>
+            <span>{{ tag()!.isActive }}</span>
+          </dd>
+          <dt><span jhiTranslate="veritasdocApp.tag.file">File</span></dt>
+          <dd>
+            @if (tag()!.file) {
+              <div>
+                <a [routerLink]="['/file', tag()!.file?.id, 'view']">{{ tag()!.file?.id }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="veritasdocApp.tag.files">Files</span></dt>
+          <dd>
+            @for (files of tag()!.files; track $index; let last = $last) {
+              <span>
+                <a [routerLink]="['/file', files.id, 'view']">{{ files?.id }}</a
+                >{{ last ? '' : ', ' }}
+              </span>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/tag', tag()!.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

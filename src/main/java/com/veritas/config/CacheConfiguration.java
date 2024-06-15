@@ -45,6 +45,20 @@ public class CacheConfiguration {
     @Bean
     public JCacheManagerCustomizer cacheManagerCustomizer() {
         return cm -> {
+            createCache(cm, com.veritas.domain.File.class.getName());
+            createCache(cm, com.veritas.domain.File.class.getName() + ".metadata");
+            createCache(cm, com.veritas.domain.File.class.getName() + ".fileTags");
+            createCache(cm, com.veritas.domain.File.class.getName() + ".fileFolders");
+            createCache(cm, com.veritas.domain.File.class.getName() + ".tags");
+            createCache(cm, com.veritas.domain.File.class.getName() + ".folders");
+            createCache(cm, com.veritas.domain.FileVersion.class.getName());
+            createCache(cm, com.veritas.domain.Metadata.class.getName());
+            createCache(cm, com.veritas.domain.Tag.class.getName());
+            createCache(cm, com.veritas.domain.Tag.class.getName() + ".files");
+            createCache(cm, com.veritas.domain.Permission.class.getName());
+            createCache(cm, com.veritas.domain.Folder.class.getName());
+            createCache(cm, com.veritas.domain.Folder.class.getName() + ".permissions");
+            createCache(cm, com.veritas.domain.Folder.class.getName() + ".files");
             // jhipster-needle-ehcache-add-entry
         };
     }

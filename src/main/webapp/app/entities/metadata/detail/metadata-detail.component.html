@@ -1,0 +1,58 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (metadata()) {
+      <div>
+        <h2 data-cy="metadataDetailsHeading"><span jhiTranslate="veritasdocApp.metadata.detail.title">Metadata</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ metadata()!.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="veritasdocApp.metadata.fileId">File Id</span></dt>
+          <dd>
+            <span>{{ metadata()!.fileId }}</span>
+          </dd>
+          <dt><span jhiTranslate="veritasdocApp.metadata.key">Key</span></dt>
+          <dd>
+            <span>{{ metadata()!.key }}</span>
+          </dd>
+          <dt><span jhiTranslate="veritasdocApp.metadata.value">Value</span></dt>
+          <dd>
+            <span>{{ metadata()!.value }}</span>
+          </dd>
+          <dt><span jhiTranslate="veritasdocApp.metadata.createdAt">Created At</span></dt>
+          <dd>
+            <span>{{ metadata()!.createdAt | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="veritasdocApp.metadata.updatedAt">Updated At</span></dt>
+          <dd>
+            <span>{{ metadata()!.updatedAt | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="veritasdocApp.metadata.file">File</span></dt>
+          <dd>
+            @if (metadata()!.file) {
+              <div>
+                <a [routerLink]="['/file', metadata()!.file?.id, 'view']">{{ metadata()!.file?.id }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/metadata', metadata()!.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

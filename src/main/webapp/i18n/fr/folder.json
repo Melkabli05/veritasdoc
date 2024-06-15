@@ -1,0 +1,32 @@
+{
+  "veritasdocApp": {
+    "folder": {
+      "home": {
+        "title": "Folders",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Folder",
+        "createOrEditLabel": "Créer ou éditer un Folder",
+        "search": "Recherche pour Folder",
+        "notFound": "Aucun Folder trouvé"
+      },
+      "created": "Un nouveau Folder a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Folder avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Folder avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Folder {{ id }} ?"
+      },
+      "detail": {
+        "title": "Folder"
+      },
+      "id": "ID",
+      "name": "Name",
+      "parentFolderId": "Parent Folder Id",
+      "createdAt": "Created At",
+      "updatedAt": "Updated At",
+      "isActive": "Is Active",
+      "permission": "Permission",
+      "file": "File",
+      "files": "Files"
+    }
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "veritasdocApp": {
+    "file": {
+      "home": {
+        "title": "Files",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau File",
+        "createOrEditLabel": "Créer ou éditer un File",
+        "search": "Recherche pour File",
+        "notFound": "Aucun File trouvé"
+      },
+      "created": "Un nouveau File a été créé avec l'identifiant {{ param }}",
+      "updated": "Le File avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le File avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le File {{ id }} ?"
+      },
+      "detail": {
+        "title": "File"
+      },
+      "id": "ID",
+      "filename": "Filename",
+      "bucketName": "Bucket Name",
+      "objectName": "Object Name",
+      "contentType": "Content Type",
+      "fileSize": "File Size",
+      "uploadedBy": "Uploaded By",
+      "createdAt": "Created At",
+      "updatedAt": "Updated At",
+      "isActive": "Is Active",
+      "fileVersion": "File Version",
+      "metadata": "Metadata",
+      "fileTag": "File Tag",
+      "fileFolder": "File Folder",
+      "tags": "Tags",
+      "folders": "Folders"
+    }
+  }
+}

@@ -1,0 +1,111 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-file-version-heading"
+        data-cy="FileVersionCreateUpdateHeading"
+        jhiTranslate="veritasdocApp.fileVersion.home.createOrEditLabel"
+      >
+        Create or edit a File Version
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" jhiTranslate="veritasdocApp.fileVersion.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" for="field_fileId" jhiTranslate="veritasdocApp.fileVersion.fileId">File Id</label>
+          <input type="text" class="form-control" name="fileId" id="field_fileId" data-cy="fileId" formControlName="fileId" />
+          @if (editForm.get('fileId')!.invalid && (editForm.get('fileId')!.dirty || editForm.get('fileId')!.touched)) {
+            <div>
+              @if (editForm.get('fileId')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_versionNumber" jhiTranslate="veritasdocApp.fileVersion.versionNumber">Version Number</label>
+          <input
+            type="number"
+            class="form-control"
+            name="versionNumber"
+            id="field_versionNumber"
+            data-cy="versionNumber"
+            formControlName="versionNumber"
+          />
+          @if (editForm.get('versionNumber')!.invalid && (editForm.get('versionNumber')!.dirty || editForm.get('versionNumber')!.touched)) {
+            <div>
+              @if (editForm.get('versionNumber')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              <small
+                class="form-text text-danger"
+                [hidden]="!editForm.get('versionNumber')?.errors?.number"
+                jhiTranslate="entity.validation.number"
+                >This field should be a number.</small
+              >
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_objectName" jhiTranslate="veritasdocApp.fileVersion.objectName">Object Name</label>
+          <input
+            type="text"
+            class="form-control"
+            name="objectName"
+            id="field_objectName"
+            data-cy="objectName"
+            formControlName="objectName"
+          />
+          @if (editForm.get('objectName')!.invalid && (editForm.get('objectName')!.dirty || editForm.get('objectName')!.touched)) {
+            <div>
+              @if (editForm.get('objectName')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_createdAt" jhiTranslate="veritasdocApp.fileVersion.createdAt">Created At</label>
+          <div class="d-flex">
+            <input
+              id="field_createdAt"
+              data-cy="createdAt"
+              type="datetime-local"
+              class="form-control"
+              name="createdAt"
+              formControlName="createdAt"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

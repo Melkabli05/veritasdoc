@@ -1,0 +1,78 @@
+entity File {
+    filename String required,
+    bucketName String required,
+    objectName String unique required,
+    contentType String,
+    fileSize Long,
+    uploadedBy String,
+    createdAt ZonedDateTime,
+    updatedAt ZonedDateTime,
+    isActive Boolean
+}
+
+entity FileVersion {
+    fileId String required,
+    versionNumber Integer required,
+    objectName String required,
+    createdAt ZonedDateTime
+}
+
+entity Metadata {
+    fileId String required,
+    key String required,
+    value String required,
+    createdAt ZonedDateTime,
+    updatedAt ZonedDateTime
+}
+
+entity Tag {
+    name String required,
+    createdAt ZonedDateTime,
+    updatedAt ZonedDateTime,
+    isActive Boolean
+}
+
+entity Permission {
+    fileId String required,
+    userId String required,
+    permission String required,
+    createdAt ZonedDateTime,
+    updatedAt ZonedDateTime
+}
+
+entity Folder {
+    name String required,
+    parentFolderId String,
+    createdAt ZonedDateTime,
+    updatedAt ZonedDateTime,
+    isActive Boolean
+}
+
+relationship OneToOne {
+    File{fileVersion} to FileVersion{file}
+}
+
+relationship OneToMany {
+    File{metadata} to Metadata{file},
+    File{fileTag} to Tag{file},
+    File{fileFolder} to Folder{file},
+    Folder{permission} to Permission{folder}
+}
+
+relationship ManyToMany {
+    File{tags} to Tag{files}
+    File{folders} to Folder{files}
+}
+
+// Set pagination options
+paginate all with infinite-scroll
+
+// Set service options
+service all with serviceImpl
+
+// Set dto options
+dto all with mapstruct
+
+// Set search options
+search all with elasticsearch
+                                

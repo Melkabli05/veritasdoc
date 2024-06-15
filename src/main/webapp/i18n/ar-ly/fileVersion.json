@@ -1,0 +1,29 @@
+{
+  "veritasdocApp": {
+    "fileVersion": {
+      "home": {
+        "title": "File Versions",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new File Version",
+        "createOrEditLabel": "Create or edit a File Version",
+        "search": "Search for File Version",
+        "notFound": "No File Versions found"
+      },
+      "created": "A new File Version is created with identifier {{ param }}",
+      "updated": "A File Version is updated with identifier {{ param }}",
+      "deleted": "A File Version is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete File Version {{ id }}?"
+      },
+      "detail": {
+        "title": "File Version"
+      },
+      "id": "ID",
+      "fileId": "File Id",
+      "versionNumber": "Version Number",
+      "objectName": "Object Name",
+      "createdAt": "Created At",
+      "file": "File"
+    }
+  }
+}
