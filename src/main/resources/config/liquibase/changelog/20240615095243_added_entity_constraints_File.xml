@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <!--
+        Added the constraints for entity File.
+    -->
+    <changeSet id="20240615095243-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="file_version_id"
+                                 baseTableName="file"
+                                 constraintName="fk_file__file_version_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="file_version"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="file_id"
+                                 baseTableName="rel_file__tags"
+                                 constraintName="fk_rel_file__tags__file_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="file"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="tags_id"
+                                 baseTableName="rel_file__tags"
+                                 constraintName="fk_rel_file__tags__tags_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="tag"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="file_id"
+                                 baseTableName="rel_file__folders"
+                                 constraintName="fk_rel_file__folders__file_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="file"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="folders_id"
+                                 baseTableName="rel_file__folders"
+                                 constraintName="fk_rel_file__folders__folders_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="folder"
+                                 />
+    </changeSet>
+</databaseChangeLog>

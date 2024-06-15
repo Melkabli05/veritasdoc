@@ -1,0 +1,58 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (permission()) {
+      <div>
+        <h2 data-cy="permissionDetailsHeading"><span jhiTranslate="veritasdocApp.permission.detail.title">Permission</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ permission()!.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="veritasdocApp.permission.fileId">File Id</span></dt>
+          <dd>
+            <span>{{ permission()!.fileId }}</span>
+          </dd>
+          <dt><span jhiTranslate="veritasdocApp.permission.userId">User Id</span></dt>
+          <dd>
+            <span>{{ permission()!.userId }}</span>
+          </dd>
+          <dt><span jhiTranslate="veritasdocApp.permission.permission">Permission</span></dt>
+          <dd>
+            <span>{{ permission()!.permission }}</span>
+          </dd>
+          <dt><span jhiTranslate="veritasdocApp.permission.createdAt">Created At</span></dt>
+          <dd>
+            <span>{{ permission()!.createdAt | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="veritasdocApp.permission.updatedAt">Updated At</span></dt>
+          <dd>
+            <span>{{ permission()!.updatedAt | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="veritasdocApp.permission.folder">Folder</span></dt>
+          <dd>
+            @if (permission()!.folder) {
+              <div>
+                <a [routerLink]="['/folder', permission()!.folder?.id, 'view']">{{ permission()!.folder?.id }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/permission', permission()!.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

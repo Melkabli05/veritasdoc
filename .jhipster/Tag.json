@@ -1,0 +1,46 @@
+{
+  "annotations": {
+    "changelogDate": "20240615095246"
+  },
+  "applications": "*",
+  "dto": "mapstruct",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "createdAt",
+      "fieldType": "ZonedDateTime"
+    },
+    {
+      "fieldName": "updatedAt",
+      "fieldType": "ZonedDateTime"
+    },
+    {
+      "fieldName": "isActive",
+      "fieldType": "Boolean"
+    }
+  ],
+  "name": "Tag",
+  "pagination": "infinite-scroll",
+  "relationships": [
+    {
+      "otherEntityName": "file",
+      "otherEntityRelationshipName": "fileTag",
+      "relationshipName": "file",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "file",
+      "otherEntityRelationshipName": "tags",
+      "relationshipName": "files",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "searchEngine": "elasticsearch",
+  "service": "serviceImpl"
+}

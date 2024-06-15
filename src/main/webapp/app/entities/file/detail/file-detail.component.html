@@ -1,0 +1,92 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (file()) {
+      <div>
+        <h2 data-cy="fileDetailsHeading"><span jhiTranslate="veritasdocApp.file.detail.title">File</span></h2>
+
+        <hr />
+
+        <jhi-alert-error></jhi-alert-error>
+
+        <jhi-alert></jhi-alert>
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ file()!.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="veritasdocApp.file.filename">Filename</span></dt>
+          <dd>
+            <span>{{ file()!.filename }}</span>
+          </dd>
+          <dt><span jhiTranslate="veritasdocApp.file.bucketName">Bucket Name</span></dt>
+          <dd>
+            <span>{{ file()!.bucketName }}</span>
+          </dd>
+          <dt><span jhiTranslate="veritasdocApp.file.objectName">Object Name</span></dt>
+          <dd>
+            <span>{{ file()!.objectName }}</span>
+          </dd>
+          <dt><span jhiTranslate="veritasdocApp.file.contentType">Content Type</span></dt>
+          <dd>
+            <span>{{ file()!.contentType }}</span>
+          </dd>
+          <dt><span jhiTranslate="veritasdocApp.file.fileSize">File Size</span></dt>
+          <dd>
+            <span>{{ file()!.fileSize }}</span>
+          </dd>
+          <dt><span jhiTranslate="veritasdocApp.file.uploadedBy">Uploaded By</span></dt>
+          <dd>
+            <span>{{ file()!.uploadedBy }}</span>
+          </dd>
+          <dt><span jhiTranslate="veritasdocApp.file.createdAt">Created At</span></dt>
+          <dd>
+            <span>{{ file()!.createdAt | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="veritasdocApp.file.updatedAt">Updated At</span></dt>
+          <dd>
+            <span>{{ file()!.updatedAt | formatMediumDatetime }}</span>
+          </dd>
+          <dt><span jhiTranslate="veritasdocApp.file.isActive">Is Active</span></dt>
+          <dd>
+            <span>{{ file()!.isActive }}</span>
+          </dd>
+          <dt><span jhiTranslate="veritasdocApp.file.fileVersion">File Version</span></dt>
+          <dd>
+            @if (file()!.fileVersion) {
+              <div>
+                <a [routerLink]="['/file-version', file()!.fileVersion?.id, 'view']">{{ file()!.fileVersion?.id }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="veritasdocApp.file.tags">Tags</span></dt>
+          <dd>
+            @for (tags of file()!.tags; track $index; let last = $last) {
+              <span>
+                <a [routerLink]="['/tag', tags.id, 'view']">{{ tags?.id }}</a
+                >{{ last ? '' : ', ' }}
+              </span>
+            }
+          </dd>
+          <dt><span jhiTranslate="veritasdocApp.file.folders">Folders</span></dt>
+          <dd>
+            @for (folders of file()!.folders; track $index; let last = $last) {
+              <span>
+                <a [routerLink]="['/folder', folders.id, 'view']">{{ folders?.id }}</a
+                >{{ last ? '' : ', ' }}
+              </span>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/file', file()!.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>
